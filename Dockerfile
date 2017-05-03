@@ -47,7 +47,6 @@ RUN set -x \
 		gcc \
 		libc-dev \
 		make \
-		"openjdk${JAVA_VERSION%%[-~bu]*}"="$JAVA_ALPINE_VERSION" \
 		openssl-dev \
 	&& ( \
 		export CATALINA_HOME="$PWD" \
@@ -56,7 +55,7 @@ RUN set -x \
 			--libdir="$TOMCAT_NATIVE_LIBDIR" \
 			--prefix="$CATALINA_HOME" \
 			--with-apr="$(which apr-1-config)" \
-			--with-java-home="$(docker-java-home)" \
+			--with-java-home="$JAVA_HOME" \
 			--with-ssl=yes \
 		&& make -j$(getconf _NPROCESSORS_ONLN) \
 		&& make install \
