@@ -86,5 +86,5 @@ RUN chmod -R a+rwx $CATALINA_HOME
   
 USER 1001
 
-EXPOSE 8080
+EXPOSE 8080 8009
 CMD ["catalina.sh", "run"]
