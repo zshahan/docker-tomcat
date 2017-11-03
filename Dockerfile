@@ -71,8 +71,9 @@ RUN set -x \
 	&& apk del .fetch-deps .native-build-deps \
 	&& rm -rf "$nativeBuildDir" \
 	&& rm bin/tomcat-native.tar.gz \
-	&& rm -rf $CATALINA_HOME/webapps/*
-
+	&& rm -rf $CATALINA_HOME/webapps/* \
+	&& chmod -R a+rwx $CATALINA_HOME
+	
 # verify Tomcat Native is working properly
 RUN set -e \
 	&& nativeLines="$(catalina.sh configtest 2>&1)" \
@@ -82,8 +83,6 @@ RUN set -e \
 		echo >&2 "$nativeLines"; \
 		exit 1; \
 	fi
-  
-RUN chmod -R a+rwx $CATALINA_HOME
   
 USER 1001
 
