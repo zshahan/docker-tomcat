@@ -83,6 +83,8 @@ RUN set -e \
 		echo >&2 "$nativeLines"; \
 		exit 1; \
 	fi
+	
+COPY server.xml $CATALINA_HOME/conf
   
 USER 1001
 
